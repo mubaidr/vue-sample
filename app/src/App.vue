@@ -23,7 +23,9 @@
         console.log(event)
       },
       convertJsonToHtml(json) {
-        const elem = document.createElement(json.type)
+        const elem = document.createElement(
+          json.type === 'text' ? 'span' : json.type
+        )
         const childs = json['inner-elements']
         // id
         if (elem.id) {
@@ -36,7 +38,10 @@
         // styles
         if (json.styles) {
           Object.keys(json.styles).forEach(style => {
-            elem.style[style] = json.styles[style]
+            // skip position absolute
+            if (style !== 'position') {
+              elem.style[style] = json.styles[style]
+            }
           })
         }
         // childs
@@ -63,24 +68,27 @@
   body {
     background-color: rgba(0, 0, 0, 0.75);
   }
+
   .editable {
-    color: rgb(255, 255, 255);
-    opacity: 1;
     border-radius: 6px;
-    transform: rotate(0deg);
     border: 1px solid rgb(70, 144, 247);
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    color: rgb(255, 255, 255);
+    font-family: Aleo;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0px;
+    line-height: 1.5em;
+    margin: 0 auto;
+    opacity: 1;
     padding: 10px;
     text-align: center;
-    letter-spacing: 0px;
-    font-size: 32px;
-    font-family: Aleo;
-    font-weight: 300;
     text-decoration: none;
-    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
-    text-transform: initial;
-    font-style: normal;
-    z-index: 2002;
     text-shadow: rgba(0, 0, 0, 0.2) 2px 2px 0px;
-    line-height: 1.5em;
+    text-transform: initial;
+    transform: rotate(0deg);
+    width: 50%;
+    z-index: 2002;
   }
 </style>
