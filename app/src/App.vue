@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <div class="editable" v-html='content' ref='editable' contenteditable="true" @input="update($event)">{{ content }}</div>
+    <div class="editable" v-html='content' ref='editable' contenteditable="true" @input="update">{{ content }}</div>
+    <pre>{{json}}</pre>
   </div>
 </template>
 
@@ -12,12 +13,39 @@
     data() {
       return {
         data: _data,
-        content: 'This Content is <span style="color: red">Editable</span>...'
+        content: 'This Content is <span style="color: red">Editable</span>...',
+        json: _data,
+        timer: null
       }
     },
+    mounted() {
+      if (Object.keys(this.data).length === 0) return
+      this.content = this.convertJsonToHtml(this.data)
+    },
+    created() {
+      // console.log(this.data)
+    },
     methods: {
-      update(event) {
-        console.log(event)
+      update() {
+        window.clearTimeout(this.timer)
+        this.timer = window.setTimeout(() => {
+          console.log(this)
+          this.json = this.convertHtmlToJson(this.$refs.editable)
+        }, 500)
+      },
+      convertHtmlToJson(elem) {
+        const childs = []
+        if (elem.childNodes) {
+          elem.childNodes.forEach(node => {
+            childs.push(this.convertHtmlToJson(node))
+          })
+        }
+        return {
+          id: elem.id,
+          styles: elem.style,
+          text: elem.innerText,
+          'inner-elements': childs
+        }
       },
       convertJsonToHtml(json) {
         const elem = document.createElement(
@@ -50,19 +78,13 @@
 
         return elem.outerHTML
       }
-    },
-    mounted() {
-      if (Object.keys(this.data).length === 0) return
-      this.content = this.convertJsonToHtml(this.data)
-    },
-    created() {
-      console.log(this.data)
     }
   }
 </script>
 
 <style>
   body {
+    color: #eee;
     background-color: rgba(0, 0, 0, 0.75);
   }
 
