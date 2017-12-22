@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <pre>
-      {{this.content}}
-    </pre>
     <div class="editable" v-html='content' ref='editable' contenteditable="true" @input="update($event)">{{ content }}</div>
   </div>
 </template>
