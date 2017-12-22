@@ -1,0 +1,11 @@
+    - Take the json and convert into HTML with correct porperties
+    - Assume this text contains contenteditable property; as I update the HTML (i.e. create new line or add text etc), it should re-calculate and re-wrap spans appropriately to keep nice structure
+    - Add 3 buttons for bg change and color change and font change: THEN when I select of a specific area and click it ; will update bg color or font-color and create/delete spans appropriately for that selected area
+    - If I delete text it should delete text correctly
+    - Once new text is added ; if there is a word-wrap ; it should create a new br/> so that it maintains nice bg with paddings on sides
+    - Allow to export it back into readable json
+
+https://codepen.io/anon/pen/YYymmq
+
+
+https://devblog.digimondo.io/building-a-json-tree-view-component-in-vue-js-from-scratch-in-six-steps-ce0c05c2fdd8
