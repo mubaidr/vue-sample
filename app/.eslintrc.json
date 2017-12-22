@@ -15,10 +15,7 @@
   },
   "extends": ["airbnb", "plugin:vue/essential", "prettier"],
   "rules": {
-    "space-before-function-paren": [
-      "error",
-      { "anonymous": "never", "named": "always", "asyncArrow": "never" }
-    ],
+    "space-before-function-paren": "off",
     "linebreak-style": "off",
     "no-extraneous-dependencies": "off",
     "no-underscore-dangle": "off",
